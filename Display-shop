@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Display Shop</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f4f4f4;
+    }
+    h1 {
+      text-align: center;
+    }
+    .search-box {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .search-box input {
+      padding: 10px;
+      width: 60%;
+      font-size: 16px;
+    }
+    .cards-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+    .card {
+      background-color: white;
+      width: 250px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      padding: 15px;
+      text-align: center;
+    }
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    .brand-name {
+      font-size: 18px;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+    .price {
+      color: green;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Display Shop</h1>
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="Search brand name..." onkeyup="searchBrands()">
+  </div>
+  <div class="cards-container" id="cardsContainer">
+    <!-- Cards will be injected here -->
+  </div>
+
+  <script>
+    const brands = [
+      { name: "iPhone X", price: "₹3,500" },
+      { name: "iPhone 11", price: "₹4,500" },
+      { name: "Samsung A10", price: "₹1,250" },
+      { name: "Redmi Note 10 Pro", price: "₹1,950" },
+      { name: "Vivo Y15", price: "₹1,550" },
+      { name: "Oppo F19", price: "₹1,950" },
+      { name: "Realme Narzo 50", price: "₹1,650" },
+      { name: "Poco X3", price: "₹1,850" },
+      { name: "Tecno Spark Go", price: "₹1,250" },
+      { name: "Infinix Hot 10", price: "₹1,350" },
+      { name: "Lava Z61", price: "₹850" },
+      { name: "Micromax IN 2b", price: "₹1,050" },
+    ];
+
+    const container = document.getElementById('cardsContainer');
+
+    function renderCards(list) {
+      container.innerHTML = '';
+      list.forEach(brand => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <img src="https://via.placeholder.com/250x180.png?text=Display" alt="Display">
+          <div class="brand-name">${brand.name}</div>
+          <div class="price">${brand.price}</div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function searchBrands() {
+      const query = document.getElementById('searchInput').value.toLowerCase();
+      const filtered = brands.filter(brand => brand.name.toLowerCase().includes(query));
+      renderCards(filtered);
+    }
+
+    renderCards(brands);
+  </script>
+</body>
+</html>
